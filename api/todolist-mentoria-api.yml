@@ -20,7 +20,7 @@ paths:
     get:
       tags:
         - Tasks
-      summary: Get all tasks lits
+      summary: Get all tasks lists
       responses:
         200:
           description: Successful response
@@ -39,7 +39,7 @@ paths:
     post:
       tags:
         - Tasks
-      summary: Create a new task lit
+      summary: Create a new task list
       parameters:
         - name: task
           in: body
