@@ -1,0 +1,269 @@
+swagger: "2.0"
+info:
+  title: To-Do List API
+  description: |-
+    This is a sample Todo List based on the OpenAPI 3.0 specification.
+    
+    Some useful links:
+    - [GitHub repository](https://github.com/brunosilvasensedia/mentoria-prog-2023)
+    - [Team Slack](https://sensedia.slack.com/archives/C060ZK3NCV6)
+  version: 1.0.0  
+
+tags:
+  - name: Tasks
+    description: More informaion about yours TODO's
+    externalDocs:
+      description: Find out more
+      url: http://swagger.io
+paths:
+  /lists:
+    get:
+      tags:
+        - Tasks
+      summary: Get all tasks lists
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                deleted:
+                  type: boolean
+                  default: false
+    post:
+      tags:
+        - Tasks
+      summary: Create a new task list
+      parameters:
+        - name: task
+          in: body
+          description: Task object
+          required: true
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                deleted:
+                  type: boolean
+                  default: false
+      responses:
+        201:
+          description: Task list created successfully
+  /lists/{listId}:
+    parameters:
+      - name: listId
+        in: path
+        required: true
+        type: integer
+    get:
+      tags:
+        - Tasks
+      summary: Get a list by ID
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                deleted:
+                  type: boolean
+                  default: false
+        404:
+          description: List not found
+    put:
+      tags:
+        - Tasks
+      summary: Update a list by ID
+      parameters:
+        - name: task
+          in: body
+          description: List object
+          required: true
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                name:
+                  type: string
+                deleted:
+                  type: boolean
+                  default: false
+      responses:
+        200:
+          description: List updated successfully
+        404:
+          description: List not found
+    delete:
+      tags:
+        - Tasks
+      summary: Delete a list by ID
+      responses:
+        204:
+          description: Task deleted successfully
+        404:
+          description: Task not found
+  /lists/{listId}/tasks:
+    parameters:
+      - name: listId
+        in: path
+        required: true
+        type: integer
+    get:
+      tags:
+        - Tasks
+      summary: Get all tasks by list ID
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: array
+            items:
+              type: object
+              properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 255
+                due_date:
+                  type: string
+                  format: date-time
+                completed:
+                  type: boolean
+                  default: false
+                deleted:
+                  type: boolean
+                  default: false       
+    post:
+      tags:
+          - Tasks
+      summary: Create a new task by list ID
+      parameters:
+        - name: task
+          in: body
+          description: Task object
+          required: true
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 255
+                due_date:
+                  type: string
+                  format: date-time
+                completed:
+                  type: boolean
+                  default: false
+                deleted:
+                  type: boolean
+                  default: false
+      responses:
+        201:
+          description: Task created successfully
+          
+  /lists/{listId}/tasks/{taskId}:
+    parameters:
+      - name: listId
+        in: path
+        required: true
+        type: integer
+      - name: taskId
+        in: path
+        required: true
+        type: integer
+    get:
+      tags:
+        - Tasks
+      summary: Get a task and list by ID 
+      responses:
+        200:
+          description: Successful response
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 255
+                due_date:
+                  type: string
+                  format: date-time
+                completed:
+                  type: boolean
+                  default: false
+                deleted:
+                  type: boolean
+                  default: false
+        404:
+          description: Task not found
+    put:
+      tags:
+        - Tasks
+      summary: Update a task and list by ID 
+      parameters:
+        - name: task
+          in: body
+          description: Task object
+          required: true
+          schema:
+            type: object
+            properties:
+                id:
+                  type: integer
+                title:
+                  type: string
+                  maxLength: 255
+                description:
+                  type: string
+                  maxLength: 255
+                due_date:
+                  type: string
+                  format: date-time
+                completed:
+                  type: boolean
+                  default: false
+                deleted:
+                  type: boolean
+                  default: false
+      responses:
+        200:
+          description: Task updated successfully
+        404:
+          description: Task not found
+    delete:
+      tags:
+        - Tasks
+      summary: Delete a task and list by ID 
+      responses:
+        204:
+          description: Task deleted successfully
+        404:
+          description: Task not found
+          
