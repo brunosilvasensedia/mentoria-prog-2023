@@ -7,7 +7,7 @@ info:
     Some useful links:
     - [GitHub repository](https://github.com/brunosilvasensedia/mentoria-prog-2023)
     - [Team Slack](https://sensedia.slack.com/archives/C060ZK3NCV6)
-  version: 1.0.0  
+  version: 1.0.1  
 
 tags:
   - name: Tasks
@@ -179,7 +179,9 @@ paths:
                   default: false
                 deleted:
                   type: boolean
-                  default: false
+                  default: false 
+                userid:
+                  type: integer
       responses:
         201:
           description: Task created successfully
@@ -221,6 +223,8 @@ paths:
                 deleted:
                   type: boolean
                   default: false
+                userid:
+                  type: integer
         404:
           description: Task not found
     put:
@@ -252,6 +256,8 @@ paths:
                 deleted:
                   type: boolean
                   default: false
+                userid:
+                  type: integer
       responses:
         200:
           description: Task updated successfully
