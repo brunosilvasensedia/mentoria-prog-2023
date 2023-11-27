@@ -2,6 +2,7 @@ package com.mentoriaprogramacao.taskMS.adapter.inbound.rest;
 
 import com.mentoriaprogramacao.taskMS.adapter.dto.ListTaskRequest;
 import com.mentoriaprogramacao.taskMS.domain.entity.ListTasksEntity;
+import com.mentoriaprogramacao.taskMS.domain.entity.TaskEntity;
 import com.mentoriaprogramacao.taskMS.domain.service.listTasksService.ListTaskService;
 import com.mentoriaprogramacao.taskMS.port.inbound.rest.ListTasksOperations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,7 @@ public class ListTaskController implements ListTasksOperations {
     }
 
     @Override
-    public ResponseEntity<ListTasksEntity> findListsByID(Integer id) {
+    public ResponseEntity<ListTasksEntity> findListsBylistId(Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(listTaskService.findListsByID(id));
     }
 
@@ -48,5 +49,25 @@ public class ListTaskController implements ListTasksOperations {
         ListTasksEntity listTasksEntity = listTaskService.saveTaskList(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(listTasksEntity.getId()).toUri();
         return ResponseEntity.created(uri).body(listTasksEntity);
+    }
+
+    @Override
+    public ResponseEntity<ListTasksEntity> saveTask(Integer listId, TaskEntity request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<TaskEntity> findTaskById(Integer listId, Integer taskId) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<ListTasksEntity> updateTask(Integer listId, Integer taskId, TaskEntity request) {
+        return null;
+    }
+
+    @Override
+    public ResponseEntity<Void> deleteTask(Integer listId, Integer taskId) {
+        return null;
     }
 }
