@@ -16,7 +16,8 @@ import java.util.List;
 @Document("listsTasks")
 public class ListTasksEntity {
 
-    @Id
+
+
     private Integer id;
     private String name;
     private boolean deleted;

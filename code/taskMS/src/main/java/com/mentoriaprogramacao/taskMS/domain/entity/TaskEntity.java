@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDate;
 
-@Document("tasks")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Document("tasks")
 public class TaskEntity {
 
     @Id

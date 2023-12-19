@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RequestMapping("/default")
+@RequestMapping("/")
 public interface ListTasksOperations {
     @GetMapping()
     ResponseEntity<List<ListTasksEntity>> findAllLists();
