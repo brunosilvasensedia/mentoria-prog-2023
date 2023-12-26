@@ -1,41 +1,23 @@
 package com.mentoriaprogramacao.userMS.domain.service.userService;
 
-
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mentoriaprogramacao.userMS.adapter.dto.UpdatePasswordRequest;
 import com.mentoriaprogramacao.userMS.domain.entity.UserEntity;
 import com.mentoriaprogramacao.userMS.domain.service.exceptions.UserAlreadyExistsException;
 import com.mentoriaprogramacao.userMS.domain.service.exceptions.UserNotFoundException;
+import com.mentoriaprogramacao.userMS.domain.service.sequenceGenerator.SequenceGeneratorService;
 import com.mentoriaprogramacao.userMS.port.outbound.repository.UserRepository;
-import jakarta.annotation.PostConstruct;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.*;
 
 @Service
 public class UserServiceImp implements UserService{
 
-    private List<UserEntity> users;
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     @Autowired
     private UserRepository userRepository;
-
-    @PostConstruct
-    private void loadMockData() {
-        ObjectMapper objectMapper = new ObjectMapper();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("users.json");
-
-        try {
-            users = objectMapper.readValue(inputStream, new TypeReference<List<UserEntity>>() {});
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     @Override
     public List<UserEntity> getAllUsers() {
@@ -53,14 +35,14 @@ public class UserServiceImp implements UserService{
             throw new UserAlreadyExistsException();
         }
 
-        user.setId(new String(UUID.randomUUID().toString()));
+        user.setId(sequenceGeneratorService.generateSequence(UserEntity.SEQUENCE_NAME));
 
         return this.userRepository.save(user);
 
     }
 
     @Override
-    public UserEntity getUserById(String id){
+    public UserEntity getUserById(Long id){
         Optional<UserEntity> userEntity = this.userRepository.findById(id);
         return userEntity.orElseThrow(() -> new UserNotFoundException());
     }
@@ -76,7 +58,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public UserEntity updateUser(String id, UserEntity userRequest) {
+    public UserEntity updateUser(Long id, UserEntity userRequest) {
         Optional<UserEntity> userEntity = this.userRepository.findById(id);
 
         if(userEntity.isPresent()) {
@@ -89,7 +71,7 @@ public class UserServiceImp implements UserService{
     }
 
     @Override
-    public void deleteUser(String id) {
+    public void deleteUser(Long id) {
         this.userRepository.deleteById(id);
     }
 

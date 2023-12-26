@@ -1,5 +1,7 @@
-package com.mentoriaprogramacao.userMS.domain.exceptions;
+package com.mentoriaprogramacao.userMS.adapter.inbound.rest;
 
+import com.mentoriaprogramacao.userMS.domain.exceptions.CustomError;
+import com.mentoriaprogramacao.userMS.domain.exceptions.EnumExceptions;
 import com.mentoriaprogramacao.userMS.domain.service.exceptions.UserAlreadyExistsException;
 import com.mentoriaprogramacao.userMS.domain.service.exceptions.UserNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;

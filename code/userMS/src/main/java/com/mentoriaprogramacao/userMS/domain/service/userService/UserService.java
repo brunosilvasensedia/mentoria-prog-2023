@@ -10,13 +10,13 @@ public interface UserService {
     List<UserEntity> getAllUsers();
     UserEntity getUser(String email);
     UserEntity saveUser(UserEntity user);
-    UserEntity getUserById(String id);
+    UserEntity getUserById(Long id);
 
     UserEntity getUserByEmail(String name);
 
-    UserEntity updateUser(String id, UserEntity user);
+    UserEntity updateUser(Long id, UserEntity user);
 
-    void deleteUser(String id);
+    void deleteUser(Long id);
 
     UserEntity updatePassword(String email, UpdatePasswordRequest request);
 }

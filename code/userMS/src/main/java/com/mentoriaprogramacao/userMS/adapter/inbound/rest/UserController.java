@@ -29,7 +29,7 @@ public class UserController implements UserOperations {
     }
 
     @Override
-    public ResponseEntity<UserEntity> findUserById(String id){
+    public ResponseEntity<UserEntity> findUserById(Long id){
         return ResponseEntity.status(HttpStatus.OK).body(userService.getUserById(id));
     }
 
@@ -46,7 +46,7 @@ public class UserController implements UserOperations {
     }
 
     @Override
-    public ResponseEntity<UserEntity> updateUser(String id, UserEntity user) {
+    public ResponseEntity<UserEntity> updateUser(Long id, UserEntity user) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(id, user));
     }
 
@@ -56,7 +56,7 @@ public class UserController implements UserOperations {
     }
 
     @Override
-    public ResponseEntity<Void> removeUser(String id){
+    public ResponseEntity<Void> removeUser(Long id){
         userService.deleteUser(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
