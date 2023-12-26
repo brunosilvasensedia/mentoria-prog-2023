@@ -6,6 +6,8 @@ import com.mentoriaprogramacao.taskMS.domain.entity.TaskEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @RequestMapping("/")
@@ -14,26 +16,26 @@ public interface ListTasksOperations {
     ResponseEntity<List<ListTasksEntity>> findAllLists();
 
     @GetMapping("/{listId}")
-    ResponseEntity<ListTasksEntity> findListsBylistId(@PathVariable("listId") Integer listId);
+    ResponseEntity<ListTasksEntity> findListsBylistId(@PathVariable("listId") Long listId);
 
     @DeleteMapping("/{listId}")
-    ResponseEntity<Void> deleteList(@PathVariable("listId") Integer listId);
+    ResponseEntity<Void> deleteList(@PathVariable("listId") Long listId);
 
     @PatchMapping("/{listId}")
-    ResponseEntity<ListTasksEntity> updateList(@PathVariable("listId") Integer listId, @RequestBody ListTaskRequest request);
+    ResponseEntity<ListTasksEntity> updateList(@PathVariable("listId") Long listId, @RequestBody ListTaskRequest request);
 
     @PostMapping()
     ResponseEntity<ListTasksEntity> saveTaskList(@RequestBody ListTaskRequest request);
 
     @PostMapping("/{listId}/tasks")
-    ResponseEntity<ListTasksEntity> saveTask(@PathVariable("listId") Integer listId, @RequestBody TaskEntity request);
+    ResponseEntity<ListTasksEntity> saveTask(@PathVariable("listId") Long listId, @RequestBody TaskEntity request) throws IOException, URISyntaxException;
 
     @GetMapping("/{listId}/tasks/{taskId}")
-    ResponseEntity<TaskEntity> findTaskById(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId);
+    ResponseEntity<TaskEntity> findTaskById(@PathVariable("listId") Long listId, @PathVariable("taskId") Long taskId);
 
     @PutMapping("/{listId}/tasks/{taskId}")
-    ResponseEntity<ListTasksEntity> updateTask(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId, @RequestBody TaskEntity request);
+    ResponseEntity<TaskEntity> updateTask(@PathVariable("listId") Long listId, @PathVariable("taskId") Long taskId, @RequestBody TaskEntity request);
 
     @DeleteMapping("/{listId}/tasks/{taskId}")
-    ResponseEntity<Void> deleteTask(@PathVariable("listId") Integer listId, @PathVariable("taskId") Integer taskId);
+    ResponseEntity<Void> deleteTask(@PathVariable("listId") Long listId, @PathVariable("taskId") Long taskId);
 }

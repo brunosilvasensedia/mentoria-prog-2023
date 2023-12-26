@@ -2,10 +2,13 @@ package com.mentoriaprogramacao.taskMS.domain.service.listTasksService;
 
 import com.mentoriaprogramacao.taskMS.adapter.dto.ListTaskRequest;
 import com.mentoriaprogramacao.taskMS.domain.entity.ListTasksEntity;
+import com.mentoriaprogramacao.taskMS.domain.entity.TaskEntity;
+import com.mentoriaprogramacao.taskMS.domain.service.sequenceGenerator.SequenceGeneratorService;
 import com.mentoriaprogramacao.taskMS.port.inbound.repository.ListTasksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +16,10 @@ import java.util.Optional;
 public class ListTaskServiceImp implements ListTaskService{
 
     @Autowired
-    ListTasksRepository listTasksRepository;
+    private ListTasksRepository listTasksRepository;
+
+    @Autowired
+    private SequenceGeneratorService sequenceGeneratorService;
 
     @Override
     public List<ListTasksEntity> findAllLists() {
@@ -21,13 +27,13 @@ public class ListTaskServiceImp implements ListTaskService{
     }
 
     @Override
-    public ListTasksEntity findListsByID(Integer id) {
+    public ListTasksEntity findListsByID(long id) {
         Optional<ListTasksEntity> listTasks = listTasksRepository.findById(id);
         return listTasks.get();
     }
 
     @Override
-    public void deleteList(Integer id) {
+    public void deleteList(long id) {
         Optional<ListTasksEntity> listTasksEntity = listTasksRepository.findById(id);
 
         if (listTasksEntity.isPresent()){
@@ -40,7 +46,7 @@ public class ListTaskServiceImp implements ListTaskService{
     }
 
     @Override
-    public ListTasksEntity updateList(Integer id, ListTaskRequest request) {
+    public ListTasksEntity updateList(long id, ListTaskRequest request) {
         Optional<ListTasksEntity> listTasksEntity = listTasksRepository.findById(id);
 
         if (listTasksEntity.isPresent()){
@@ -55,8 +61,12 @@ public class ListTaskServiceImp implements ListTaskService{
     @Override
     public ListTasksEntity saveTaskList(ListTaskRequest request) {
         ListTasksEntity listTasksEntity = new ListTasksEntity();
+
+        List<TaskEntity> tasks = new ArrayList<>();
+        listTasksEntity.setId(sequenceGeneratorService.generateSequence(ListTasksEntity.SEQUENCE_NAME));
         listTasksEntity.setName(request.getName());
         listTasksEntity.setDeleted(false);
+        listTasksEntity.setListTask(tasks);
 
         return listTasksRepository.save(listTasksEntity);
     }
