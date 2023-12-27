@@ -3,6 +3,9 @@ package com.mentoriaprogramacao.taskMS.domain.service.tasksService;
 import com.mentoriaprogramacao.taskMS.adapter.dto.UserDTO;
 import com.mentoriaprogramacao.taskMS.domain.entity.ListTasksEntity;
 import com.mentoriaprogramacao.taskMS.domain.entity.TaskEntity;
+import com.mentoriaprogramacao.taskMS.domain.service.exceptions.ListNotFoundException;
+import com.mentoriaprogramacao.taskMS.domain.service.exceptions.TaskNotFoundExcpetion;
+import com.mentoriaprogramacao.taskMS.domain.service.exceptions.UserNotFoundException;
 import com.mentoriaprogramacao.taskMS.domain.service.sequenceGenerator.SequenceGeneratorService;
 import com.mentoriaprogramacao.taskMS.port.inbound.repository.ListTasksRepository;
 import com.mentoriaprogramacao.taskMS.port.inbound.repository.TaskRepository;
@@ -39,7 +42,7 @@ public class TaskServiceImp implements TaskService{
         if(listTasksEntity.isPresent()){
 
             if(!verificarUser(request.getUserEmail())) {
-                throw new RuntimeException("Usuario nao existe");
+                throw new UserNotFoundException();
             }
 
             request.setId(sequenceGeneratorService.generateSequence(TaskEntity.SEQUENCE_NAME));
@@ -55,7 +58,7 @@ public class TaskServiceImp implements TaskService{
 
             return listTask;
         } else {
-         throw new RuntimeException("lista nao existe");
+         throw new ListNotFoundException();
         }
     }
 
@@ -74,10 +77,10 @@ public class TaskServiceImp implements TaskService{
             if(taskEntity.isPresent()) {
                 return taskEntity.get();
             } else {
-                throw new RuntimeException("Task nao encontrada");
+                throw new TaskNotFoundExcpetion();
             }
         } else {
-         throw new RuntimeException("lista nao existe");
+         throw new ListNotFoundException();
         }
     }
 
@@ -94,10 +97,10 @@ public class TaskServiceImp implements TaskService{
                 updateTask(task, request);
                 return this.taskRepository.save(task);
             } else {
-                throw new RuntimeException("task nao encontrada");
+                throw new TaskNotFoundExcpetion();
             }
         } else {
-            throw new RuntimeException("Lista nao encontrada");
+            throw new ListNotFoundException();
         }    
         
     }
@@ -109,7 +112,7 @@ public class TaskServiceImp implements TaskService{
         if(listTasksEntity.isPresent()){
             taskRepository.deleteById(taskId);
         } else {
-            throw new RuntimeException("Lista nao encontrada");
+            throw new ListNotFoundException();
         } 
 
     }

@@ -3,6 +3,7 @@ package com.mentoriaprogramacao.taskMS.domain.service.listTasksService;
 import com.mentoriaprogramacao.taskMS.adapter.dto.ListTaskRequest;
 import com.mentoriaprogramacao.taskMS.domain.entity.ListTasksEntity;
 import com.mentoriaprogramacao.taskMS.domain.entity.TaskEntity;
+import com.mentoriaprogramacao.taskMS.domain.service.exceptions.ListNotFoundException;
 import com.mentoriaprogramacao.taskMS.domain.service.sequenceGenerator.SequenceGeneratorService;
 import com.mentoriaprogramacao.taskMS.port.inbound.repository.ListTasksRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,8 +29,13 @@ public class ListTaskServiceImp implements ListTaskService{
 
     @Override
     public ListTasksEntity findListsByID(long id) {
-        Optional<ListTasksEntity> listTasks = listTasksRepository.findById(id);
-        return listTasks.get();
+        Optional<ListTasksEntity> listTasksEntity = listTasksRepository.findById(id);
+
+        if (listTasksEntity.isPresent()){
+            return listTasksEntity.get();
+        } else {
+            throw new ListNotFoundException();
+        }
     }
 
     @Override
@@ -41,7 +47,7 @@ public class ListTaskServiceImp implements ListTaskService{
             listTasks.setDeleted(true);
             listTasksRepository.save(listTasks);
         } else {
-            throw new RuntimeException();
+            throw new ListNotFoundException();
         }
     }
 
@@ -54,7 +60,7 @@ public class ListTaskServiceImp implements ListTaskService{
             listTasks.setName(request.getName());
             return this.listTasksRepository.save(listTasks);
         } else {
-            throw new RuntimeException();
+            throw new ListNotFoundException();
         }
     }
 
