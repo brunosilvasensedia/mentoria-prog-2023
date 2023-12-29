@@ -1,0 +1,92 @@
+[
+  {
+    "id": "1",
+    "name": "João Silva",
+    "email": "joao.silva@email.com",
+    "password": "password123"
+  },
+  {
+    "id": "2",
+    "name": "Maria Oliveira",
+    "email": "maria.oliveira@email.com",
+    "password": "password456"
+  },
+  {
+    "id": "3",
+    "name": "Carlos Santos",
+    "email": "carlos.santos@email.com",
+    "password": "password789"
+  },
+  {
+    "id": "4",
+    "name": "Ana Pereira",
+    "email": "ana.pereira@email.com",
+    "password": "passwordabc"
+  },
+  {
+    "id": "5",
+    "name": "Rodrigo Lima",
+    "email": "rodrigo.lima@email.com",
+    "password": "password456"
+  },
+  {
+    "id": "6",
+    "name": "Fernanda Costa",
+    "email": "fernanda.costa@email.com",
+    "password": "password789"
+  },
+  {
+    "id": "7",
+    "name": "Gustavo Oliveira",
+    "email": "gustavo.oliveira@email.com",
+    "password": "password123"
+  },
+  {
+    "id": "8",
+    "name": "Camila Santos",
+    "email": "camila.santos@email.com",
+    "password": "password456"
+  },
+  {
+    "id": "9",
+    "name": "Lucas Silva",
+    "email": "lucas.silva@email.com",
+    "password": "password789"
+  },
+  {
+    "id": "10",
+    "name": "Mariana Lima",
+    "email": "mariana.lima@email.com",
+    "password": "passwordabc"
+  },
+  {
+    "id": "11",
+    "name": "Rafael Costa",
+    "email": "rafael.costa@email.com",
+    "password": "password123"
+  },
+  {
+    "id": "12",
+    "name": "Juliana Pereira",
+    "email": "juliana.pereira@email.com",
+    "password": "password456"
+  },
+  {
+    "id": "13",
+    "name": "Pedro Oliveira",
+    "email": "pedro.oliveira@email.com",
+    "password": "password789"
+  },
+  {
+    "id": "14",
+    "name": "Isabela Santos",
+    "email": "isabela.santos@email.com",
+    "password": "passwordabc"
+  },
+  {
+    "id": "15",
+    "name": "Fábio Lima",
+    "email": "fabio.lima@email.com",
+    "password": "password123"
+  }
+]
